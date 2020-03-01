@@ -2,11 +2,14 @@ var express = require("express");
 var	bodyParser = require("body-parser");// body-parser middleware which parses the body and sets req.body property.
 var app = express();
 var port = 3070;
+const helmet = require('helmet')
 var routes = require("./routes/routes"); // sub app
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// adding Helmet to enhance your API's security
+app.use(helmet());
 app.use("/api", routes); // mount the sub app
 
 app.get("/", function(req,res){
